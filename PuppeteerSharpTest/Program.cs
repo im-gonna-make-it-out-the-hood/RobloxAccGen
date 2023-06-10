@@ -8,8 +8,6 @@ using PuppeteerExtraSharp.Plugins.AnonymizeUa;
 using PuppeteerExtraSharp.Plugins.ExtraStealth;
 using PuppeteerSharp;
 using PuppeteerSharp.Input;
-using Zennolab.CapMonsterCloud;
-using Zennolab.CapMonsterCloud.Requests;
 
 Console.WriteLine("Downloading local browser... This may take a while if it is not already downloaded!");
 await new BrowserFetcher().DownloadAsync();
