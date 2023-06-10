@@ -130,12 +130,11 @@ while (true) {
     await Task.WhenAll(tasks);
     tasks.Clear();
     if (!Shared.HittedRatelimit) {
-        Console.WriteLine("[Post-Loop] Waiting 300 seconds...");
-        //await Task.Delay(300000);
-    }
-    else {
+        Console.WriteLine("[Post-Loop] Waiting 300 seconds..."); 
+        await Task.Delay(300000);
+    } else {
         Console.WriteLine("[Post-Loop] WARNING: Suffered a ratelimit! Waiting 600 seconds instead of 300...");
-        //await Task.Delay(600000);
+        await Task.Delay(600000);
     }
 }
 
