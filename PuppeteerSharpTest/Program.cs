@@ -14,12 +14,8 @@ using Zennolab.CapMonsterCloud.Requests;
 Console.WriteLine("Downloading local browser... This may take a while if it is not already downloaded!");
 await new BrowserFetcher().DownloadAsync();
 
-var capMonsterClient = CapMonsterCloudClientFactory.Create(new ClientOptions {
-    ClientKey = "ca30362bff612a32c226ed8f22974f0f",
-});
-Console.WriteLine($"Capmonster bal: {await capMonsterClient.GetBalanceAsync()}");
-
 //Console.WriteLine("Loading proxies...");
+
 /*if (!File.Exists("proxies.txt")) {
     Environment.Exit(-1);
 }*/
@@ -96,8 +92,7 @@ while (true) {
                     page = await browser.NewPageAsync();
 
                 accountGeneratorResult =
-                    await AttemptGenerateAccount(page, AmountToGenOnOneIp, client, false, semaphoreSlim,
-                        capMonsterClient);
+                    await AttemptGenerateAccount(page, AmountToGenOnOneIp, client, false, semaphoreSlim);
 
                 await page.DeleteCookieAsync(await page.GetCookiesAsync());
             }
@@ -139,7 +134,7 @@ while (true) {
 }
 
 static async Task<bool> AttemptGenerateAccount(IPage page, int generationObjective, HttpClient client,
-    bool dropScreenshots, SemaphoreSlim semaphore, ICapMonsterCloudClient capMonsterClient) {
+    bool dropScreenshots, SemaphoreSlim semaphore) {
     // Create a new page
     for (var j = 0; j < generationObjective; j++) {
         await page.SetGeolocationAsync(new GeolocationOption {
