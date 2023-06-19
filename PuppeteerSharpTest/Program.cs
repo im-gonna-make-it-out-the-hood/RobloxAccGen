@@ -11,7 +11,7 @@ using PuppeteerSharp.Input;
 
 Console.WriteLine("Downloading local browser... This may take a while if it is not already downloaded!");
 await new BrowserFetcher().DownloadAsync();
-
+Console.WriteLine("Downloaded browser, or already downloaded");
 //Console.WriteLine("Loading proxies...");
 
 /*if (!File.Exists("proxies.txt")) {
@@ -39,8 +39,8 @@ if (!ThreadPool.SetMinThreads(Environment.ProcessorCount, Environment.ProcessorC
 
 
 SemaphoreSlim semaphoreSlim = new(1);
-var tasks = new List<Task>(1);
-const int AmountToGenOnOneIp = 1;
+var tasks = new List<Task>(2);
+const int AmountToGenOnOneIp = 4;
 while (true) {
     Console.WriteLine(
         $"Starting generation of {AmountToGenOnOneIp} accounts! There are 300 seconds of a grace period between attempts, and 120 seconds of wait between a single attempt.");
@@ -50,7 +50,8 @@ while (true) {
             extra.Use(new AnonymizeUaPlugin());
             extra.Use(new StealthPlugin());
             var browser = await extra.LaunchAsync(new LaunchOptions {
-                Headless = false, /*LogProcess = true, DumpIO = true,*/ Args = new[] {
+                Headless = true,
+ 		/*LogProcess = true, DumpIO = true,*/ Args = new[] {
                     "--no-sandbox",
                     "--disable-setuid-sandbox",
                     "--disable-infobars",
