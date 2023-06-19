@@ -20,7 +20,7 @@ Console.WriteLine("Downloaded browser, or already downloaded");
 
 //var proxies = File.ReadAllLines("proxies.txt");
 var client = new HttpClient(new HttpClientHandler {
-    SslProtocols = SslProtocols.Tls13,
+    SslProtocols = SslProtocols.Tls12,
 }, true);
 
 // Initialization plugin builder
